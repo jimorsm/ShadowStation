@@ -1,0 +1,89 @@
+{% extends 'base.html' %}
+
+{% block page_title %}
+    Account
+{% endblock %}
+
+{% block main %}
+    {% if user.is_staff %}
+        {% include 'table.html' %}
+    {% else %}
+
+
+        <div class="row equal">
+
+        {% for object in object_list %}
+            {% if object.user == user %}
+            <div class="col-4 pb-3">
+                <div class="card">
+                    <div class="row no-gutters">
+
+                        <div class="col-md-8">
+                            <div class="card-body">
+                                <ul class="list-group list-group-flush">
+                                    <li class="list-group-item d-flex flex-row justify-content-between">
+                                        <span>Server</span>
+                                        <span>{{ object.server }}</span>
+                                    </li>
+                                    <li class="list-group-item d-flex flex-row justify-content-between">
+                                        <span>Port</span>
+                                        <span>{{ object.port }}</span>
+                                    </li>
+                                    <li class="list-group-item d-flex flex-row justify-content-between">
+                                        <span>Secret</span>
+                                        <span>{{ object.secret }}</span>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <div class="col-md-4">
+                            <img src="..." class="card-img" alt="...">
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+{% endif %}
+
+{% endfor %}
+        </div>
+
+
+
+
+
+        <br>
+
+        <div class="card">
+            <div class="card-header d-flex flex-row justify-content-between">
+                <h4>User Informations</h4>
+                <div class="inline-group">
+                    <button class="btn btn-outline-primary mr-1" data-toggle="modal" data-target="#userModify">修改
+                    </button>
+                    <button class="btn btn-outline-danger">删除</button>
+                </div>
+            </div>
+            <ul class="list-group list-group-flush">
+                <li class="list-group-item d-flex flex-row justify-content-between">
+                    <span>Username</span>
+                    <span>{{ object.username }}</span>
+                </li>
+                <li class="list-group-item d-flex flex-row justify-content-between">
+                    <span>Email</span>
+                    <span>{{ object.email }}</span>
+                </li>
+                <li class="list-group-item d-flex flex-row justify-content-between">
+                    <span>注册时间</span>
+                    <span>{{ object.date_joined|date:"Y-m-d H:i" }}</span>
+                </li>
+                <li class="list-group-item d-flex flex-row justify-content-between">
+                    <span>最后登入时间</span>
+                    <span>{{ object.last_login|date:"Y-m-d H:i"|default:'Never Logged In' }}</span>
+                </li>
+            </ul>
+        </div>
+
+
+    {% endif %}
+{% endblock %}

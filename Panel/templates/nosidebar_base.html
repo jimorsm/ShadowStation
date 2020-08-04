@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    {% load staticfiles %}
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href={% static 'css/bootstrap.min.css' %}>
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src={% static 'js/jquery-3.5.1.min.js' %}></script>
+    <script src={% static 'js/popper.min.js' %}></script>
+    <script src={% static 'js/bootstrap.min.js' %}></script>
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href={% static 'css/font-awesome.css' %}>
+    <!-- custom css -->
+    <link rel="stylesheet" href={% static 'css/base.css' %}>
+    {% block head %}{% endblock %}
+    <title>{% block title %}默认标题{% endblock %} - oOps</title>
+</head>
+<body>
+<!-- header -->
+{% include 'header.html' %}
+
+<!-- Bootstrap row -->
+<div id="body-row" class="row">
+
+    <!-- MAIN -->
+    <main class="col">
+
+        {% block main %}
+            <h1>
+                Collapsing Menu
+                <small class="text-muted">Version 2.1</small>
+            </h1>
+
+
+            <div class="card">
+                <h4 class="card-header">Requirements</h4>
+                <div class="card-body">
+                    <ul>
+                        <li>JQuery</li>
+                        <li>Bootstrap 4 beta-3</li>
+                    </ul>
+                </div>
+            </div>
+
+            <hr>
+
+            <p>Sriracha biodiesel taxidermy organic post-ironic, Intelligentsia salvia mustache 90's code editing
+                brunch.
+                Butcher polaroid VHS art party, hashtag Brooklyn deep v PBR narwhal sustainable mixtape swag wolf
+                squid
+                tote
+                bag. Tote bag cronut semiotics,
+                raw denim deep v taxidermy messenger bag. Tofu YOLO Etsy, direct trade ethical Odd Future jean
+                shorts
+                paleo.
+                Forage Shoreditch tousled aesthetic irony, street art organic Bushwick artisan cliche semiotics ugh
+                synth
+                chillwave meditation. Shabby
+                chic lomo plaid vinyl chambray Vice. Vice sustainable cardigan, Williamsburg master cleanse hella
+                DIY
+                90's
+                blog.</p>
+
+            <hr>
+
+        {% endblock %}
+    </main>
+    <!-- Main Col END -->
+
+</div>
+<!-- body-row END -->
+
+
+<script>
+    // Hide submenus
+    $('#body-row .collapse').collapse('hide');
+
+    // Collapse/Expand icon
+    $('#collapse-icon').addClass('fa-angle-double-left');
+
+    // Collapse click
+    $('[data-toggle=sidebar-colapse]').click(function () {
+        SidebarCollapse();
+    });
+
+    function SidebarCollapse() {
+        $('.menu-collapsed').toggleClass('d-none');
+        $('.sidebar-submenu').toggleClass('d-none');
+        $('.submenu-icon').toggleClass('d-none');
+        $('#sidebar-container').toggleClass('sidebar-expanded sidebar-collapsed');
+
+        // Treating d-flex/d-none on separators with title
+        var SeparatorTitle = $('.sidebar-separator-title');
+        if (SeparatorTitle.hasClass('d-flex')) {
+            SeparatorTitle.removeClass('d-flex');
+        } else {
+            SeparatorTitle.addClass('d-flex');
+        }
+
+        // Collapse/Expand icon
+        $('#collapse-icon').toggleClass('fa-angle-double-left fa-angle-double-right');
+    }
+</script>
+{% block custom-scripts %}
+{% endblock %}
+</body>
+</html>
